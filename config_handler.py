@@ -8,7 +8,7 @@ def load_cfg():
   except OSError: # generate default settings if file does not exist
     print("generating new settings file")
     cfg_file = open("settings.json", "w")
-    default_settings = {"discord_token": "", "prefix": "$"}
+    default_settings = {"discord_token": "", "prefix": "#"}
     json.dump(default_settings, cfg_file)
   
   cfg_file = open("settings.json", "r")
