@@ -7,21 +7,24 @@ import youtube_dl
 import discord
 from discord.ext import commands
 from discord.utils import get
-from dotenv import load_dotenv
+
+from config_handler import *
 
 import re
 from word_list import amogus_list
 words_re = re.compile("|".join(amogus_list))
 
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv()
-TOKEN = os.environ.get("DISCORD_TOKEN")
-GUILD = '15er Steyr'
+config = load_cfg()
 
-sound_ready = True
+TOKEN = config['discord_token']
+if TOKEN == "":
+  print("Enter your Bots Token into settings.json to continue!")
+  exit()
+GUILD = '15er Steyr'
+command_prefix = config['prefix']
 
 client = discord.Client()
-client = commands.Bot(command_prefix='#', help_command=None)
+client = commands.Bot(command_prefix=command_prefix, help_command=None)
 amogus_emoji = discord.utils.get(client.emojis, name='amogus')
 
 # check if message contains any forbidden words
@@ -31,6 +34,8 @@ def sus(message):
 @client.event
 async def on_ready():
   print(f'{client.user} has connected to Discord!')
+  
+  print(f'Using prefix {command_prefix}')
   for guild in client.guilds:
       if guild.name == GUILD:
           break
@@ -59,7 +64,7 @@ async def say(ctx, arg):
 
 @client.command()
 async def help(ctx):
-    await ctx.send("https://www.youtube.com/watch?v=nFstpT_YTro")
+    await ctx.send(f'{client.command_prefix}prefix <arg> - changes the prefix used for this bot\nhttps://www.youtube.com/watch?v=nFstpT_YTro')
 
 @client.command()
 async def amogus(ctx):
@@ -73,8 +78,15 @@ async def amogus(ctx):
   server = ctx.message.guild
   channel = ctx.author.voice.channel
   voice_client = server.voice_client
-  voice_client.play(discord.FFmpegPCMAudio('amogus.mp3'))
+  voice_client.play(discord.FFmpegPCMAudio('media/amogus.mp3'))
   time.sleep(2)
   await voice_client.disconnect()
+
+@client.command()
+async def prefix(ctx, arg):
+  config['prefix'] = arg
+  update_cfg_file(config)
+  client.command_prefix = arg
+  await ctx.send(f'Now using this prefix: {arg}')
 
 client.run(TOKEN)
