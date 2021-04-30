@@ -63,23 +63,18 @@ async def help(ctx):
 
 @client.command()
 async def amogus(ctx):
-  if sound_ready:
-    sound_ready = False
-    if ctx.author.voice and ctx.author.voice.channel:
-      channel = ctx.author.voice.channel
-    else:
-      await ctx.send("You are not connected to a voice channel")
-      return
-    await channel.connect()
-
-    server = ctx.message.guild
+  if ctx.author.voice and ctx.author.voice.channel:
     channel = ctx.author.voice.channel
-    voice_client = server.voice_client
-    voice_client.play(discord.FFmpegPCMAudio('amogus.mp3'))
-    time.sleep(2)
-    await voice_client.disconnect()
-    sound_ready = True
   else:
-    ctx.send("Not ready yet.")
+    await ctx.send("You are not connected to a voice channel")
+    return
+  await channel.connect()
+
+  server = ctx.message.guild
+  channel = ctx.author.voice.channel
+  voice_client = server.voice_client
+  voice_client.play(discord.FFmpegPCMAudio('amogus.mp3'))
+  time.sleep(2)
+  await voice_client.disconnect()
 
 client.run(TOKEN)
