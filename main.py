@@ -26,7 +26,7 @@ amogus_emoji = discord.utils.get(client.emojis, name='amogus')
 
 # check if message contains any forbidden words
 def sus(message):
-  return words_re.search(message.content) and message.author.name != "Amogus Bot"
+  return words_re.search(message.content.lower()) and message.author.name != "Amogus Bot"
 
 @client.event
 async def on_ready():
@@ -50,8 +50,6 @@ async def on_message(message):
   print('i sig nochricht: ' + message.content + " von " + message.author.name)
   if sus(message):
       await message.add_reaction("<:amogus:832622134009397278>")
-      
-      
   await client.process_commands(message)
 
 @client.command()
