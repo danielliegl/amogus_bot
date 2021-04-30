@@ -21,7 +21,7 @@ GUILD = '15er Steyr'
 sound_ready = True
 
 client = discord.Client()
-client = commands.Bot(command_prefix='#')
+client = commands.Bot(command_prefix='#', help_command=None)
 amogus_emoji = discord.utils.get(client.emojis, name='amogus')
 
 # check if message contains any forbidden words
