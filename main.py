@@ -58,6 +58,10 @@ async def say(ctx, arg):
     await ctx.send(arg)
 
 @client.command()
+async def help(ctx):
+    await ctx.send("https://www.youtube.com/watch?v=nFstpT_YTro")
+
+@client.command()
 async def amogus(ctx):
   if sound_ready:
     sound_ready = False
