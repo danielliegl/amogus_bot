@@ -1,3 +1,5 @@
+#add words in lower case
+
 amogus_list = ['amogus',
   'sus',
   'impostor',
