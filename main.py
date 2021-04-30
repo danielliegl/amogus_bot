@@ -8,7 +8,7 @@ from discord.utils import get
 from dotenv import load_dotenv
 
 import re
-amogus_list = ['amogus', 'sus', 'impostor', 'among us', 'suspect', 'vent', 'beidl', 'ඞ', 'spion', 'unter uns', 'sabotage', 'emergency meeting', 'grd-K33tOSM', 'drip', 'electrical', 'crewmate', 'red', 'angus']
+from word_list import amogus_list
 words_re = re.compile("|".join(amogus_list))
 
 dotenv_path = join(dirname(__file__), '.env')
