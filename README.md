@@ -6,4 +6,4 @@ Small Discord bot that adds an amogus reaction to certain messages.
 - You can change the prefix in the _settings.json_ file or using the _#prefix <arg>_ command.
 
 ## Dependencies
-Python packages: ``pip3 install discord PyDictionary translators PyNaCl``
+Python packages: ``pip3 install discord PyDictionary translators PyNaCl ffmpeg``
