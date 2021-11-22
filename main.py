@@ -97,7 +97,7 @@ async def amogus(ctx):
   server = ctx.message.guild
   channel = ctx.author.voice.channel
   voice_client = server.voice_client
-  voice_client.play(discord.FFmpegPCMAudio('media/amogus.mp3'))
+  voice_client.play(discord.FFmpegPCMAudio('./media/amogus.mp3'))
   time.sleep(2)
   await voice_client.disconnect()
 
