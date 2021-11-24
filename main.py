@@ -18,7 +18,7 @@ from word_list import amogus_list
 # ----INIT STUFF----
 # ------------------
 
-amogus_list = improve_wordlist(amogus_list)
+# amogus_list = improve_wordlist(amogus_list)
 words_re = re.compile("|".join(amogus_list))
 
 config = load_cfg()
@@ -97,7 +97,8 @@ async def amogus(ctx):
   server = ctx.message.guild
   channel = ctx.author.voice.channel
   voice_client = server.voice_client
-  voice_client.play(discord.FFmpegPCMAudio('./media/amogus.mp3'))
+  audio_source = discord.FFmpegPCMAudio('media\amogus.mp3')
+  voice_client.play(audio_source)
   time.sleep(2)
   await voice_client.disconnect()
 
